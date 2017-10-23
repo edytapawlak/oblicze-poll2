@@ -1,4 +1,4 @@
 *.pyc
 *.swp
-oblicze\private_settings.py
+oblicze/private_settings.py
 db.sqlite3
