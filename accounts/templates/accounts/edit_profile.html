@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title> Edytuj dane  </title>
+{% endblock %}
+
+{% block body %}
+    <div class = "container">
+        <h1> Profil </h1>
+        <form method = "post">
+            {% csrf_token %}
+            {{user_form.as_p}}
+            {{profile_form.as_p}}
+            <button type = "submit">Zatwierdź</button>
+        </form>
+     </div>
+{% endblock %}

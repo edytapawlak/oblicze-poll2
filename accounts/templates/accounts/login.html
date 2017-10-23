@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block head %}
+	<title>Login</title>
+{% endblock %}
+{% block body %}
+	<div class = "container">
+		<h1>Zaloguj się</h1>
+		<p>Możesz się tu zalogować</p>
+
+		<form method = "post"> 
+			{% csrf_token %}
+			{{ form.as_p }}
+			<button class = "btn btn-default" type = "submit" >Login</button>
+		</form>	
+        <a href = "/account/reset-password">Zapomniałeś hasła</a>
+	</div>
+{% endblock %}
