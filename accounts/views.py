@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from accounts.forms import RegistrationForm, EditProfileForm, EditAddProfileForm
 from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def home(request):
