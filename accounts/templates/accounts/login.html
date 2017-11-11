@@ -13,6 +13,6 @@
 			{{ form.as_p }}
 			<button class = "btn btn-default" type = "submit" >Login</button>
 		</form>	
-        <a href = "/account/reset-password">Zapomniałeś hasła</a>
+        <a href = "{% url 'reset_password' %}">Zapomniałeś hasła</a>
 	</div>
 {% endblock %}

@@ -6,6 +6,10 @@ from django.db.models.signals import post_save
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
     institute = models.CharField(max_length = 100, default = '')
+    
+    def __str__(self):
+        return self.user.username
+
 
 def create_profile(sender, **kwargs):
     if(kwargs['created']):

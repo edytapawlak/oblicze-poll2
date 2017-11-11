@@ -35,20 +35,20 @@
             {% if user.is_authenticated %}
             <ul class="nav navbar-nav">
                 <li class="active"><a href="/">Home</a></li>
-                <li class="active"><a href="/account/profile">Profil</a></li>
-                <li class="active"><a href="/account/profile/edit">Edytuj dane</a></li>
-                <li class="active"><a href="/account/change-password">Zmień hasło</a></li>
+                <li class="active"><a href="{% url 'view_profile' %}">Profil</a></li>
+                <li class="active"><a href="{% url 'edit_profile' %}">Edytuj dane</a></li>
+                <li class="active"><a href="{% url 'change_password' %}">Zmień hasło</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/account/logout">Wyloguj</a></li>
+                <li><a href="{% url 'logout' %}">Wyloguj</a></li>
             </ul>
             {% else %}
             <ul class="nav navbar-nav">
                 <li class="active"><a href="/">Home</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/account/login">Zaloguj się</a></li>
-                <li><a href="/account/register">Zarejestruj się</a></li>
+                <li><a href="{% url 'login' %}">Zaloguj się</a></li>
+                <li><a href="{% url 'register' %}">Zarejestruj się</a></li>
             </ul>
             {% endif %}
         </div>
