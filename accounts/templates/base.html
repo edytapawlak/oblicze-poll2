@@ -16,6 +16,25 @@
         margin: 20px;
     }
 </style>
+
+</script>
+
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css"> 
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+<script>
+$(document).ready(function() {
+    $('.datepicker').datepicker(
+                                {dateFormat: "dd/mm/yy",
+                                minDate: "11/11/17",
+                                maxDate: "17/11/17",
+                                changeMonth: false,
+                                changeYear: false,
+                                });
+});
+</script>
+
+
 </head> 
 <body>
 <div class="bs-example">
@@ -35,20 +54,20 @@
             {% if user.is_authenticated %}
             <ul class="nav navbar-nav">
                 <li class="active"><a href="/">Home</a></li>
-                <li class="active"><a href="{% url 'view_profile' %}">Profil</a></li>
-                <li class="active"><a href="{% url 'edit_profile' %}">Edytuj dane</a></li>
-                <li class="active"><a href="{% url 'change_password' %}">Zmień hasło</a></li>
+                <li class="active"><a href="{% url 'accounts:view_profile' %}">Profil</a></li>
+                <li class="active"><a href="{% url 'accounts:edit_profile' %}">Edytuj dane</a></li>
+                <li class="active"><a href="{% url 'accounts:change_password' %}">Zmień hasło</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="{% url 'logout' %}">Wyloguj</a></li>
+                <li><a href="{% url 'accounts:logout' %}">Wyloguj</a></li>
             </ul>
             {% else %}
             <ul class="nav navbar-nav">
                 <li class="active"><a href="/">Home</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="{% url 'login' %}">Zaloguj się</a></li>
-                <li><a href="{% url 'register' %}">Zarejestruj się</a></li>
+                <li><a href="{% url 'accounts:login' %}">Zaloguj się</a></li>
+                <li><a href="{% url 'accounts:register' %}">Zarejestruj się</a></li>
             </ul>
             {% endif %}
         </div>

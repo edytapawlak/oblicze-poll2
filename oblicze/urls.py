@@ -20,5 +20,7 @@ from oblicze import views
 urlpatterns = [
     url(r'^$', views.login_redirect, name = 'login_redirect') ,
     url(r'^admin/', admin.site.urls),
-    url(r'^account/', include('accounts.urls')),
+    url(r'^account/', include('accounts.urls', namespace = 'accounts')),
+    url(r'^accomodation/', include('accomodation.urls', namespace = 'accomodation')),
+
 ]
