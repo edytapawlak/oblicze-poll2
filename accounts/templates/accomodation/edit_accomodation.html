@@ -3,7 +3,20 @@
 {% block body %}
     <form method = "post">
         {% csrf_token %}
-        {{ form.as_p }}
+        <h2>Obiady:</h2>
+        {{ form_dinner.as_p }}
+   
+        <div class="btn-group" data-toggle="buttons"> 
+        {% for days in dates%}
+            <label class="btn btn-info">
+                <input type="checkbox" name = "dates"  autocomplete="off" value ={{ days }}> {{ days }}
+            </label>
+            <input type="checkbox">
+        {% endfor %}
+        </div>
+
+        <h2>Noclegi: </h2>
+        {{ form_accomodation.as_p }}
         <button type = "submit">Zatwierdź</button>
     </form>
 {% endblock %}
