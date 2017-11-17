@@ -6,18 +6,63 @@
         <h2>Obiady:</h2>
         {{ form_dinner.as_p }}
    
-        <div class="btn-group" data-toggle="buttons"> 
-        {% for days in dates%}
-            <label class="btn btn-info">
-                <input type="checkbox" name = "dates"  autocomplete="off" value ={{ days }}> {{ days }}
-            </label>
-            <input type="checkbox">
-        {% endfor %}
-        </div>
+        <div class="btn-group-vertical" data-toggle="buttons"> 
+        <table class="table table-hover">
+        <thead>
+            <tr>
+                <th> Data</th>
+                <th> Danie wegetariańskie </th>
+            </tr>
+        </thead>
+       {% for days in dates%}
+        <tbody>
+            <tr>
+                <td><label class="btn btn-info">
+                    <input type="checkbox" name = "dates"  autocomplete="off" value ={{ days }}> {{ days }}
+                    </label>
+                </td>
+                <td><label class="btn btn-secondary">
+                    <input type="checkbox">
+                    </label>
+                </td> 
+            </tr>
+        </tbody>
+       {% endfor %}
+       </table>
+       </div>
 
         <h2>Noclegi: </h2>
         {{ form_accomodation.as_p }}
         <button type = "submit">Zatwierdź</button>
+<br>
+       <div class="btn-group" data-toggle="buttons">
+  <label class="btn btn-secondary active">
+    <input type="checkbox" checked autocomplete="off"> Checkbox 1 (pre-checked)
+  </label>
+  <label class="btn btn-secondary">
+    <input type="checkbox" autocomplete="off"> Checkbox 2
+  </label>
+  <label class="btn btn-secondary">
+    <input type="checkbox" autocomplete="off"> Checkbox 3
+  </label>
+</div> 
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Button</th>
+            <th> TTT </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><button type="button" class="btn btn-primary">button</button></td>
+        </tr>
+    </tbody>
+</table>
+
+
+
     </form>
 {% endblock %}
 

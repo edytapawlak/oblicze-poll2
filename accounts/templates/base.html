@@ -1,82 +1,86 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-{% block head %}
-<title>Example of Bootstrap 3 Static Navbar</title>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-{% endblock %}
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<style type="text/css">
-    .bs-example{
-        margin: 20px;
-    }
-</style>
+    {% block head %}
+    <title></title>
+    {% endblock %}
 
-</script>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <!-- Custom styles for this template -->
+    {% load static %}
+    <link href="{% static 'accounts/style.css' %}" rel="stylesheet">
+  </head>
 
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css"> 
-<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
-<script>
-$(document).ready(function() {
-    $('.datepicker').datepicker(
-                                {dateFormat: "dd/mm/yy",
-                                minDate: "11/11/17",
-                                maxDate: "17/11/17",
-                                changeMonth: false,
-                                changeYear: false,
-                                });
-});
-</script>
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="#">Oblicze</a>
+        <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-
-</head> 
-<body>
-<div class="bs-example">
-    <nav class="navbar navbar-default">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a href="/" class="navbar-brand">Olbicze</a>
-        </div>
-        <!-- Collection of nav links and other content for toggling -->
-        <div id="navbarCollapse" class="collapse navbar-collapse">
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
             {% if user.is_authenticated %}
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="/">Home</a></li>
-                <li class="active"><a href="{% url 'accounts:view_profile' %}">Profil</a></li>
-                <li class="active"><a href="{% url 'accounts:edit_profile' %}">Edytuj dane</a></li>
-                <li class="active"><a href="{% url 'accounts:change_password' %}">Zmień hasło</a></li>
+            <ul class="nav navbar-nav mr-auto">
+                <li class="active"><a class="nav-link"  href="/">Home</a></li>
+                <li class="active"><a class="nav-link" href="{% url 'accounts:view_profile' %}">Profil</a></li>
+                <li class="active"><a class="nav-link" href="{% url 'accounts:edit_profile' %}">Edytuj dane</a></li>
+                <li class="active"><a class="nav-link" href="{% url 'accounts:change_password' %}">Zmień hasło</a></li>
             </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="{% url 'accounts:logout' %}">Wyloguj</a></li>
+            <ul class="nav navbar-nav ml-auto">
+                <li><a class="nav-link" href="{% url 'accounts:logout' %}">Wyloguj</a></li>
             </ul>
             {% else %}
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="/">Home</a></li>
+            <ul class="nav navbar-nav mr-auto">
+                <li class="active"><a class="nav-link"  href="/">Home</a></li>
             </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="{% url 'accounts:login' %}">Zaloguj się</a></li>
-                <li><a href="{% url 'accounts:register' %}">Zarejestruj się</a></li>
+            <ul class="nav navbar-nav ml-auto">
+                <li><a class="nav-link" href="{% url 'accounts:login' %}">Zaloguj się</a></li>
+                <li><a class="nav-link" href="{% url 'accounts:register' %}">Zarejestruj się</a></li>
             </ul>
-            {% endif %}
+            {% endif %}         
         </div>
-    </nav>
-<div class= "container">
-{% block body %}
-{% endblock %}
-</div>
+      </nav>
+    </header>
+    <div class="container-fluid">
+      <div class="row">
+    {% if user.is_authenticated %}
+        <nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
+          <ul class="nav nav-pills flex-column">
+            <li class="nav-item">
+              <a class="nav-link active" href="{% url 'accomodation:accomodation' %}">Obiady i noclegi<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Rejestracja referatów</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Rejestracja plakatów</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Głosowanie</a>
+            </li>
+          </ul>
+        </nav>
+    {% endif %}
+        <main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
+            {% block body %}
+            {% endblock %}
+        </main>
+      </div>
+    </div>
 
-</div>
-</body>
-</html>                            
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+  </body>
+</html>
+
