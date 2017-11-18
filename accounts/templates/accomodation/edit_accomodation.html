@@ -1,68 +1,42 @@
 {% extends 'base.html' %}
 
+
 {% block body %}
     <form method = "post">
         {% csrf_token %}
         <h2>Obiady:</h2>
-        {{ form_dinner.as_p }}
    
-        <div class="btn-group-vertical" data-toggle="buttons"> 
-        <table class="table table-hover">
-        <thead>
-            <tr>
-                <th> Data</th>
-                <th> Danie wegetariańskie </th>
-            </tr>
-        </thead>
-       {% for days in dates%}
-        <tbody>
-            <tr>
-                <td><label class="btn btn-info">
-                    <input type="checkbox" name = "dates"  autocomplete="off" value ={{ days }}> {{ days }}
-                    </label>
-                </td>
-                <td><label class="btn btn-secondary">
-                    <input type="checkbox">
-                    </label>
-                </td> 
-            </tr>
-        </tbody>
-       {% endfor %}
-       </table>
-       </div>
+    <div class="btn-group-vertical" data-toggle="buttons">
+        {% for days in dinner_dates%}
+        <label class="btn btn-outline-secondary">
+            <input type="checkbox" name = "date" autocomplete="off" value = {{ days }}> {{ days }}
+        </label>
+        {% endfor %}
+    </div>
+        <div class="btn-group-vertical" data-toggle="buttons">
+         {% for days in dinner_dates%}
+        <label class="btn btn-outline-primary">
+            <input type="checkbox" autocomplete="off" name = "isVege" value = "{{ days }}"> Danie wegetariańskie        </label>
+        {% endfor %}
+        </div>
+
+        {{ form_dinner.as_p }}
 
         <h2>Noclegi: </h2>
-        {{ form_accomodation.as_p }}
-        <button type = "submit">Zatwierdź</button>
+ 
+        <div class="btn-group-vertical" data-toggle="buttons">
+        {% for days in hostel_dates%}
+        <label class="btn btn-outline-secondary">
+            <input type="checkbox" name = "hostel_date" autocomplete="off" value = {{ days }}> {{ days }}
+        </label>
+        {% endfor %}
+    </div>
+        
 <br>
-       <div class="btn-group" data-toggle="buttons">
-  <label class="btn btn-secondary active">
-    <input type="checkbox" checked autocomplete="off"> Checkbox 1 (pre-checked)
-  </label>
-  <label class="btn btn-secondary">
-    <input type="checkbox" autocomplete="off"> Checkbox 2
-  </label>
-  <label class="btn btn-secondary">
-    <input type="checkbox" autocomplete="off"> Checkbox 3
-  </label>
-</div> 
-
-<table class="table table-hover">
-    <thead>
-        <tr>
-            <th>Button</th>
-            <th> TTT </th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><button type="button" class="btn btn-primary">button</button></td>
-        </tr>
-    </tbody>
-</table>
-
-
-
+<div class = "col-8">
+       <button type = "submit" class="btn btn-dark float-xl-right">Zatwierdź</button>
+</div>
     </form>
+
 {% endblock %}
 

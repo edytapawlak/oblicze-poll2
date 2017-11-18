@@ -26,9 +26,10 @@ class DinnerForm(forms.ModelForm):
 #            widget = forms.CheckboxSelectMultiple,
 #            required=False)
 
+    remark = forms.CharField(required = False)
     class Meta:
         model = Dinner
-        fields = ( 'vege', 'remark', )
+        fields = ( 'remark', )
 #        widgets = {'date': forms.DateInput()}
 
 
