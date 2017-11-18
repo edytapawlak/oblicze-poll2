@@ -8,15 +8,15 @@
    
     <div class="btn-group-vertical" data-toggle="buttons">
         {% for days in dinner_dates%}
-        <label class="btn btn-outline-secondary">
-            <input type="checkbox" name = "date" autocomplete="off" value = {{ days }}> {{ days }}
+        <label class="btn btn-outline-secondary {% if days in user_din %} active {% endif %}" >
+            <input type="checkbox" {% if days in user_din %} checked {% endif %} name = "date" autocomplete="off" id = "d{{ days }}"  value = {{ days }}> {{ days }}
         </label>
         {% endfor %}
     </div>
         <div class="btn-group-vertical" data-toggle="buttons">
          {% for days in dinner_dates%}
-        <label class="btn btn-outline-primary">
-            <input type="checkbox" autocomplete="off" name = "isVege" value = "{{ days }}"> Danie wegetariańskie        </label>
+        <label class="btn btn-outline-primary {% if days in user_vege %} active {% endif %}">
+            <input type="checkbox" {% if days in user_vege %} checked {% endif %}   autocomplete="off" name = "isVege" value = "{{ days }}"> Danie wegetariańskie        </label>
         {% endfor %}
         </div>
 
@@ -26,8 +26,8 @@
  
         <div class="btn-group-vertical" data-toggle="buttons">
         {% for days in hostel_dates%}
-        <label class="btn btn-outline-secondary">
-            <input type="checkbox" name = "hostel_date" autocomplete="off" value = {{ days }}> {{ days }}
+        <label class="btn btn-outline-secondary {% if days in user_nights %} active {% endif %}">
+            <input type="checkbox"  {% if days in user_nights %} checked {% endif %} name = "hostel_date" autocomplete="off" value = {{ days }}> {{ days }}
         </label>
         {% endfor %}
     </div>
