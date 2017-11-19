@@ -27,6 +27,8 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'accounts',
     'accomodation',
+    'activities',
+    'django_mathjax',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -133,6 +135,16 @@ EMAIL_HOST = 'localhost'
 EMAIL_PORT = 1025
 
 DATE_INPUT_FORMATS = ('%d/%m/%Y')
+MATHJAX_ENABLED=True
+MATHJAX_CONFIG_DATA = {
+  "tex2jax": {
+    "inlineMath":
+      [
+          ['\$','\$'],
+          ['\\(','\\)']
+      ]
+  }
+}
 
 try: 
     from .private_settings import *

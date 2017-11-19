@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class = "container">
+    {% if form %}
+    <form method = "post">
+        {% csrf_token %}
+        {{ form.as_p }}
+    
+        <button type = "submit"> Zatwierdź </button>
+    </form>
+    {% endif %}
+</div>
+
+{% endblock %}

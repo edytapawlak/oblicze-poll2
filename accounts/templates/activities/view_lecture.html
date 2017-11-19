@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    {% csrf_token %}
+    <h1> Referat </h1>
+    <p><b>Tytuł:</b> {{ lecture.title }}</p>
+    
+    <p><b>Abstrakt:</b> {{ lecture.abstract }} </p>
+
+    <a class="btn btn-info" href="{% url 'activities:edit_lecture' %}"  > Edytuj</a> 
+</div>
+
+{% endblock %}
+
