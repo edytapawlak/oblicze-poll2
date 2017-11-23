@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    {% csrf_token %}
+    <h1> Plakat </h1>
+    <p><b>Tytuł:</b> {{ poster.title }}</p>
+    
+    <p><b>Abstrakt:</b> {{ poster.abstract }} </p>
+
+    <a class="btn btn-info" href="{% url 'activities:edit_poster' %}"  > Edytuj</a> 
+</div>
+
+{% endblock %}
+
