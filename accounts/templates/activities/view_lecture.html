@@ -7,6 +7,8 @@
     
     <p><b>Abstrakt:</b> {{ lecture.abstract }} </p>
 
+    <p><b>Tagi: </b> {%for tag in lecture.tags.all %} #{{ tag.title }} {% endfor %}  </p>
+
     <a class="btn btn-info" href="{% url 'activities:edit_lecture' %}"  > Edytuj</a> 
 </div>
 
