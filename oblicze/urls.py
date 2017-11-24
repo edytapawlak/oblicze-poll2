@@ -22,5 +22,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^account/', include('accounts.urls', namespace = 'accounts')),
     url(r'^accomodation/', include('accomodation.urls', namespace = 'accomodation')),
-    url(r'^activities/', include('activities.urls', namespace = 'activities'))
+    url(r'^activities/', include('activities.urls', namespace = 'activities')),
+    url(r'^schedule/', include('schedule.urls', namespace = 'schedule')),
 ]

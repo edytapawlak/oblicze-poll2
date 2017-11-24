@@ -6,7 +6,7 @@ from activities.models import Author
 def register_lecture(request):
     author, created = Author.objects.get_or_create(user = request.user)
     lecture = author.lecture_id
-    print(lecture)
+#    print(lecture)
     if request.method == 'POST':
         form = LectureForm(request.POST, instance = lecture)
         if form.is_valid():

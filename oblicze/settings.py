@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'accounts',
     'accomodation',
     'activities',
+    'schedule',
     'django_mathjax',
     'django.contrib.admin',
     'django.contrib.auth',
