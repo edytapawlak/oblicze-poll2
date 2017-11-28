@@ -15,11 +15,15 @@ def register(request):
         if form.is_valid():
             form.save()
             return redirect('/account')  
+        else: 
+            form = RegistrationForm(request.POST)
+            args = {'form': form}
+            return render(request, 'accounts/reg_form.html', args)
 
     else:
         form = RegistrationForm()
-         
-        args = {'form': form}
+        err =  "Wprowadź poprawne dane"
+        args = {'form': form, 'err': err}
         return render(request, 'accounts/reg_form.html', args)
 
 def view_profile(request):

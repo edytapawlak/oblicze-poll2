@@ -3,3 +3,5 @@
 oblicze/private_settings.py
 db.sqlite3
 oblicze_env/*
+staticfiles
+.env
