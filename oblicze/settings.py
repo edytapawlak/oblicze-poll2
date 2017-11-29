@@ -20,7 +20,7 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
-ALLOWED_HOSTS = [ 'oblicze.herokuapp.com' ]
+ALLOWED_HOSTS = [ 'calm-citadel-11411.herokuapp.com' ]
 
 
 # Application definition
