@@ -6,3 +6,5 @@ oblicze_env/*
 staticfiles
 .env
 *.pdf
+Procfile
+requirements.txt
