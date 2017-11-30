@@ -1,5 +1,5 @@
 from django.contrib import admin
-from activities.models import Poster, Lecture, Author, Tag, Break
+from activities.models import Poster, Lecture, Author, Tag, Break, Status
 
 class LectureAdmin(admin.ModelAdmin):
     list_display = ('title', 'abstract' )
@@ -27,3 +27,4 @@ admin.site.register(Poster, PosterAdmin)
 admin.site.register(Author, AuthorAdmin)
 admin.site.register(Tag)
 admin.site.register(Break)
+admin.site.register(Status)

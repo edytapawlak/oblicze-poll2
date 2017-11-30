@@ -9,6 +9,8 @@
 
     <p><b>Tagi: </b> {%for tag in poster.tags.all %} #{{ tag.title }} {% endfor %}  </p>
 
+    <p><b>Status:</b> {{ poster.status}} </p>
+
     <a class="btn btn-info" href="{% url 'activities:edit_poster' %}"  > Edytuj</a> 
 </div>
 

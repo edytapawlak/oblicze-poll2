@@ -8,12 +8,18 @@ class Tag(models.Model):
     def __str__(self):
         return self.title
 
+class Status(models.Model):
+    title = models.CharField(max_length = 100)
+    def __str__(self):
+        return self.title
+
 class Lecture(models.Model):
     title = models.CharField(max_length = 500)
     abstract = models.CharField(max_length = 1000)
     tags = models.ManyToManyField(Tag)
     schedule = models.ForeignKey(Schedule, null = True, blank = True)
-    
+    status = models.ForeignKey(Status, null = True, blank = True)    
+
     def __str__(self):
         return ' -- '.join([str( Author.objects.get(lecture_id = self)), self.title])
 
@@ -23,6 +29,7 @@ class Poster(models.Model):
     abstract = models.CharField(max_length = 1000)
     tags = models.ManyToManyField(Tag)
     schedule = models.ForeignKey(Schedule, null = True, blank = True)  
+    status = models.ForeignKey(Status, null = True, blank = True)    
 
 class Author(models.Model):
     user = models.ForeignKey(User)

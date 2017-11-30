@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from activities.forms import LectureForm, PosterForm
-from activities.models import Author
+from activities.models import Author, Status
+from utils import is_tex_valid
 
 # Create your views here.
 def register_lecture(request):
@@ -10,7 +11,16 @@ def register_lecture(request):
     if request.method == 'POST':
         form = LectureForm(request.POST, instance = lecture)
         if form.is_valid():
-            created_lect = form.save()
+            #sprawdzenie czy abstrakt jest poprawny
+            created_lect = form.save(commit = False )
+            created_lect.tags = form.cleaned_data['tags']
+            print(str(created_lect.tags))
+            try:
+                is_tex_valid(form.cleaned_data['abstract'])
+                created_lect.status = Status.objects.get(title = "Czeka na akceptację") 
+            except ValueError:
+                created_lect.status = Status.objects.get(title = "Czeka na poprawę")
+            created_lect.save()
             updated_value = {'lecture_id': created_lect}
             author, created = Author.objects.update_or_create(user = request.user, defaults = updated_value)
             return redirect('/activities/view_lecture')
@@ -33,7 +43,15 @@ def edit_poster(request):
     if request.method == 'POST':
         form = PosterForm(request.POST, instance = poster)
         if form.is_valid():
-            created_poster= form.save()
+            created_poster= form.save(commit = False)
+            created_poster.tags = form.cleaned_data['tags']
+             #sprawdzenie czy abstrakt jest poprawny
+            try:
+                is_tex_valid(form.cleaned_data['abstract'])
+                created_poster.status = Status.objects.get(title = "Czeka na akceptację") 
+            except ValueError:
+                created_poster.status = Status.objects.get(title = "Czeka na poprawę")
+            created_poster.save()
             updated_value = {'poster_id': created_poster}
             author, created = Author.objects.update_or_create(user = request.user, defaults = updated_value)
             return redirect('/activities/view_poster')

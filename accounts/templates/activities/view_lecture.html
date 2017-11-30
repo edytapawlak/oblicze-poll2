@@ -9,6 +9,8 @@
 
     <p><b>Tagi: </b> {%for tag in lecture.tags.all %} #{{ tag.title }} {% endfor %}  </p>
 
+    <p><b>Status:</b> {{ lecture.status}} </p>
+
     <a class="btn btn-info" href="{% url 'activities:edit_lecture' %}"  > Edytuj</a> 
 </div>
 
