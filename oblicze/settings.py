@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'accomodation',
     'activities',
     'schedule',
+    'abstract_contest',
     'django_mathjax',
     'django.contrib.admin',
     'django.contrib.auth',

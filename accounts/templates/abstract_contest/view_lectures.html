@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<form method = "POST">
+    {% csrf_token %}
+<div class = "container">
+<h2>Czekające na akceptację</h2>
+<table class = "table">
+    <tbody>
+    {% for lect in correct_lectures %}
+        <tr>
+            <td><input type = "checkbox" {% if lect in choosed %} checked {% endif %} 
+ name = "correct" value = "{{ lect.id }}" ></td>
+            <td>
+                <b>{{lect.title }} </b> <br>
+                {{lect.abstract}} 
+            </td>
+        <tr>  
+    {% endfor %}
+    </tbody>
+</table>
+
+<h2>Czekające na poprawę </h2>
+<table class = "table">
+    <tbody>
+    {% for lect in uncorrect_lectures %}
+        <tr>
+            <td><input type = "checkbox" name = "uncorrect" ></td>
+            <td>
+                <b>{{lect.title }} </b> <br>
+                {{lect.abstract}}
+            </td>
+        <tr>
+    {% endfor %}
+    </tbody>
+</table>
+<input class="btn btn-info" type = "submit" value= "Zapisz" >
+</div>
+</form>
+{% endblock %}
+

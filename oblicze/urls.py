@@ -23,5 +23,6 @@ urlpatterns = [
     url(r'^account/', include('accounts.urls', namespace = 'accounts')),
     url(r'^accomodation/', include('accomodation.urls', namespace = 'accomodation')),
     url(r'^activities/', include('activities.urls', namespace = 'activities')),
-    url(r'^schedule/', include('schedule.urls', namespace = 'schedule')),
+    url(r'^schedule/', include('schedule.urls', namespace = 'schedule')),  
+    url(r'^abstract_contest/', include('abstract_contest.urls', namespace = 'abstract_contest')),
 ]
