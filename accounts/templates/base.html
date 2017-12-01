@@ -72,13 +72,14 @@
             </li>
           </ul>
             {% if perms.abstract_contest %}
-            <div class= "container"> Status:</div>
-            <ul class="nav flex-column">
+            <hr>
+            <div class= "container"><b>Konkurs</b> </div>
+            <ul class="nav nav-pills flex-column">
                 <li class="nav-item">
-                    <a class="nav-link active" href="{% url 'abstract_contest:choose_lectures' %}">Konkurs referatów</a>
+                    <a class="nav-link" href="{% url 'abstract_contest:choose_lectures' %}">Konkurs referatów</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">Konkurs plakatów</a>
+                    <a class="nav-link" href="#">Konkurs plakatów</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'abstract_contest:generate_pdf' %}">Pobierz referaty i plakaty  w PDF</a>

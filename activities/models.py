@@ -21,7 +21,11 @@ class Lecture(models.Model):
     status = models.ForeignKey(Status, null = True, blank = True)    
 
     def __str__(self):
-        return ' -- '.join([str( Author.objects.get(lecture_id = self)), self.title])
+        authors = list(Author.objects.filter(lecture_id = self))
+        aut_text = ''
+        for a in authors:
+            aut_text += str(a) + ' '
+        return ' -- '.join([aut_text, (self.title)])
 
 
 class Poster(models.Model):
