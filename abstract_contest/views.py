@@ -1,6 +1,9 @@
 from django.shortcuts import render
-from activities.models import Lecture, Status 
+from activities.models import Lecture, Status, Author 
 from abstract_contest.models import ChoosedLecture
+from django.http import FileResponse, Http404
+import os, subprocess
+from tex_templates.tex_const import PREAMBULE, END,  PDF_OUTPUT
 
 from django.contrib.auth.decorators import user_passes_test
 
@@ -34,3 +37,35 @@ def choose_lectures(request):
 
 def choose_posters(request):
     pass
+
+def generate_book(request):
+    filename = 'broszurka'
+    lectures_list = Lecture.objects.filter(status = Status.objects.get(title = "Czeka na akceptację")) 
+ 
+#    lectures_list = Lecture.objects.all()
+    lectures_with_authors = [(lect, Author.objects.get(lecture_id = lect)) for lect in lectures_list ]
+    with open(PDF_OUTPUT + filename +'.tex','w+') as f:
+        f.write( PREAMBULE + '\n' )
+        for (lect, auth) in lectures_with_authors:
+            f.write(r'\par \textbf{' + lect.title + r'} \newline' + '\n' +
+                    r'\textit{'+ str(auth)  +r'} \newline' + '\n' +
+                    lect.abstract + r'\newline ' + '\n')
+        f.write(END)
+    f.close()
+
+    cmd = ['pdflatex', '-interaction', 'nonstopmode', PDF_OUTPUT + filename +'.tex']
+    proc = subprocess.Popen(cmd)
+    proc.communicate()
+
+    retcode = proc.returncode
+    if not retcode == 0:
+        os.unlink(PDF_OUTPUT + filename +'.pdf')
+        raise ValueError('Error {} executing command: {}'.format(retcode, ' '.join(cmd)))
+
+    os.unlink(filename +'.aux')
+    os.system("mv broszurka.* " + PDF_OUTPUT  )
+
+    try:
+        return FileResponse(open(PDF_OUTPUT + filename +'.pdf', 'rb'), content_type='application/pdf')
+    except ValueError:
+        print(Tujestźle)
