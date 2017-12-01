@@ -4,12 +4,16 @@
 <form method = "POST">
     {% csrf_token %}
 <div class = "container">
+<div class="float-md-right">
+<input class="btn btn-info" type = "submit" value= "Zapisz" >
+</div></div>
+<div class = "container" id = "box">
 <h2>Czekające na akceptację</h2>
 <table class = "table">
     <tbody>
     {% for lect in correct_lectures %}
-        <tr>
-            <td><input type = "checkbox" {% if lect in choosed %} checked {% endif %} 
+        <tr  {% if lect in choosed %} style = "background-color:#A3BE8C" {% else %}  style = "background-color:#EBCB8B" {% endif %} id = "{{lect.id}}" >
+            <td><input type = "checkbox" {% if lect in choosed %} checked  {% endif %} 
  name = "correct" value = "{{ lect.id }}" ></td>
             <td>
                 <b>{{lect.title }} </b> <br>
@@ -19,13 +23,14 @@
     {% endfor %}
     </tbody>
 </table>
-
+</div>
+<div class = "container" >
 <h2>Czekające na poprawę </h2>
 <table class = "table">
     <tbody>
     {% for lect in uncorrect_lectures %}
-        <tr>
-            <td><input type = "checkbox" name = "uncorrect" ></td>
+        <tr style="background-color:#BF616A" id = "u{{lect.id}}" >
+            <td><input type = "checkbox" name = "uncorrect" value = "{{lect.id}}"></td>
             <td>
                 <b>{{lect.title }} </b> <br>
                 {{lect.abstract}}
@@ -34,8 +39,31 @@
     {% endfor %}
     </tbody>
 </table>
-<input class="btn btn-info" type = "submit" value= "Zapisz" >
 </div>
 </form>
+<!--Zmiana kolorów w zależności od statusu -->
+<script>
+var cbs = document.querySelectorAll('input[name = correct]');
+for(var i = 0; i < cbs.length; i++) {
+  cbs[i].addEventListener('change', function() {
+    if(this.checked) {
+        document.getElementById(this.value).style.backgroundColor = "#A3BE8C";
+    } else {
+        document.getElementById(this.value).style.backgroundColor = "#EBCB8B";
+    }
+    });
+}
+var cbs = document.querySelectorAll('input[name = uncorrect]');
+for(var i = 0; i < cbs.length; i++) {
+  cbs[i].addEventListener('change', function() {
+    if(this.checked) {
+        document.getElementById("u".concat(this.value)).style.backgroundColor = "#D08770";
+    } else {
+        document.getElementById("u".concat(this.value)).style.backgroundColor = "#BF616A";
+    } 
+  });
+}
+</script>
+
 {% endblock %}
 

@@ -71,6 +71,23 @@
               <a class="nav-link" href="#">Głosowanie</a>
             </li>
           </ul>
+            {% if perms.abstract_contest %}
+            <div class= "container"> Status:</div>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'abstract_contest:choose_lectures' %}">Konkurs referatów</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">Konkurs plakatów</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Pobierz referaty i plakaty  w PDF</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Zatwierdź wyniki konkursu</a>
+                </li>
+            </ul>
+            {% endif %}
         </nav>
     {% endif %}
         <main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
