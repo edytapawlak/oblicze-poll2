@@ -7,3 +7,5 @@ PREAMBULE = r'''\documentclass{article}
 '''
 
 END = '\end{document}'
+PDF_OUTPUT = 'generated_pdf/'
+TMP_OUTPUT = 'tex_templates/'
