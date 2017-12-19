@@ -40,23 +40,23 @@ def generate_book(request):
     filename = 'broszurka'
     lectures_list = Lecture.objects.filter(status = Status.objects.get(title = "Czeka na akceptację")) 
  
-#    lectures_list = Lecture.objects.all()
-    
     lectures_with_authors = [(lect, list(Author.objects.filter(lecture_id = lect))) for lect in lectures_list ]
     with open(PDF_OUTPUT + filename +'.tex','w+') as f:
         f.write( PREAMBULE + '\n' )
+        f.write(r'\section{Referaty}')
         for (lect, auth) in lectures_with_authors:
             f.write(r'\par \textbf{' + lect.title + r'} \newline' + '\n' +
                     r'\textit{'+ ', '.join([str(a) for a in auth])  +r'} \newline' + '\n' +
                     lect.abstract + r'\newline ' + '\n')
         f.write(END)
-    f.close()
+    #f.close()
 
     cmd = ['pdflatex', '-interaction', 'nonstopmode', PDF_OUTPUT + filename +'.tex']
     proc = subprocess.Popen(cmd)
     proc.communicate()
 
     retcode = proc.returncode
+    print(retcode)
     if not retcode == 0:
         os.unlink(PDF_OUTPUT + filename +'.pdf')
         raise ValueError('Error {} executing command: {}'.format(retcode, ' '.join(cmd)))

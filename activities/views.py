@@ -12,7 +12,7 @@ def register_lecture(request):
         form = LectureForm(request.POST, instance = lecture)
         if form.is_valid():
             #sprawdzenie czy abstrakt jest poprawny
-            created_lect = form.save(commit = False )
+            created_lect = form.save()
             created_lect.tags = form.cleaned_data['tags']
             print(str(created_lect.tags))
             try:
