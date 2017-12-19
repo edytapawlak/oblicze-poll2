@@ -5,6 +5,5 @@ db.sqlite3
 oblicze_env/*
 staticfiles
 .env
-generated_pdf/*
 Procfile
 requirements.txt

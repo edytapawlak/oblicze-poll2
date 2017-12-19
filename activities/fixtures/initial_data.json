@@ -1,0 +1,23 @@
+[
+  {
+    "model": "activities.status",
+    "pk": 1,
+    "fields": {
+      "title": "Czeka na akceptację"
+    }
+  },
+  {
+    "model": "activities.status",
+    "pk": 2,
+    "fields": {
+      "title": "Czeka na poprawę"
+    }
+  },
+  {
+    "model": "activities.status",
+    "pk": 3,
+    "fields": {
+      "title": "Zaakceptowany"
+    }
+  }
+]
