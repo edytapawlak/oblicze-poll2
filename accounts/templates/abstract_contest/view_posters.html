@@ -7,18 +7,20 @@
 <div class="float-md-right">
 <input class="btn btn-info" type = "submit" value= "Zapisz" >
 </div></div>
-<h1> Referaty</h1>
+
+<h1>Plakaty</h1>
+
 <div class = "container" id = "box">
 <h4>Czekające na akceptację</h4>
 <table class = "table">
     <tbody>
-    {% for lect in correct_lectures %}
-        <tr  {% if lect in choosed %} style = "background-color:#A3BE8C" {% else %}  style = "background-color:#EBCB8B" {% endif %} id = "{{lect.id}}" >
-            <td><input type = "checkbox" {% if lect in choosed %} checked  {% endif %} 
- name = "correct" value = "{{ lect.id }}" ></td>
+    {% for pos in correct_posters %}
+        <tr  {% if pos in choosed %} style = "background-color:#A3BE8C" {% else %}  style = "background-color:#EBCB8B" {% endif %} id = "{{pos.id}}" >
+            <td><input type = "checkbox" {% if pos in choosed %} checked  {% endif %} 
+ name = "correct" value = "{{ pos.id }}" ></td>
             <td>
-                <b>{{lect.title }} </b> <br>
-                {{lect.abstract}} 
+                <b>{{pos.title }} </b> <br>
+                {{pos.abstract}} 
             </td>
         <tr>  
     {% endfor %}
@@ -29,12 +31,12 @@
 <h4>Czekające na poprawę </h4>
 <table class = "table">
     <tbody>
-    {% for lect in uncorrect_lectures %}
-        <tr style="background-color:#BF616A" id = "u{{lect.id}}" >
-            <td><input type = "checkbox" name = "uncorrect" value = "{{lect.id}}"></td>
+    {% for pos in uncorrect_posters %}
+        <tr style="background-color:#BF616A" id = "u{{pos.id}}" >
+            <td><input type = "checkbox" name = "uncorrect" value = "{{pos.id}}"></td>
             <td>
-                <b>{{lect.title }} </b> <br>
-                {{lect.abstract}}
+                <b>{{pos.title }} </b> <br>
+                {{pos.abstract}}
             </td>
         <tr>
     {% endfor %}

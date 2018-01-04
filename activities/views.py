@@ -43,7 +43,7 @@ def edit_poster(request):
     if request.method == 'POST':
         form = PosterForm(request.POST, instance = poster)
         if form.is_valid():
-            created_poster= form.save(commit = False)
+            created_poster= form.save()
             created_poster.tags = form.cleaned_data['tags']
              #sprawdzenie czy abstrakt jest poprawny
             try:
