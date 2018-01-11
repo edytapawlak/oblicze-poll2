@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block body %}
+{% csrf_token %}
+<form>
+{% for l in lectures %}
+    <div id = {{l.id}}>
+        <h4>{{ l }} </h4> <br>
+        <input type="radio" name="jeden" value="{{l.id}}" onclick = "makeInactive(this)" onmousedown = "makeActive1()"  > 1 pkt <br>
+        <input type="radio" name="dwa" value="{{l.id }}" onclick = "makeInactive(this)" onmousedown = "makeActive2()" > 2 pkt <br>
+        <input type="radio" name="trzy" value="{{ l.id }}" onclick = "makeInactive(this)" onmousedown = "makeActive3()" > 3 pkt 
+        <br>
+        <br>
+    </div>
+{% endfor %}
+</form> 
+
+<script>
+function makeInactive(x) {
+     var nodes = document.getElementById(x.value).getElementsByTagName('*');
+            if(x.checked){
+                for(var i = 0; i < nodes.length; i++){
+                    nodes[i].disabled = true;
+                    console.log('ustawiam nieaktywne');
+                }
+            }
+   }
+
+function makeActive1() {
+     var selected = document.querySelector('input[name = "jeden"]:checked'); 
+     var nodes = document.getElementById(selected.value).getElementsByTagName('*');
+        for(var i = 0; i < nodes.length; i++){
+            nodes[i].disabled = false;
+             console.log('ustawiam aktywne');
+            }
+    }
+
+function makeActive2() {
+     var selected = document.querySelector('input[name = "dwa"]:checked'); 
+     var nodes = document.getElementById(selected.value).getElementsByTagName('*');
+        for(var i = 0; i < nodes.length; i++){
+            nodes[i].disabled = false;
+            console.log('ustawiam aktywne');
+            }
+   }
+
+function makeActive3() {
+     var selected = document.querySelector('input[name = "trzy"]:checked'); 
+     var nodes = document.getElementById(selected.value).getElementsByTagName('*');
+        for(var i = 0; i < nodes.length; i++){
+            nodes[i].disabled = false;
+            console.log('ustawiam aktywne');
+            }
+   }
+
+</script>
+
+{% endblock %}
+

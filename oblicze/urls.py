@@ -25,4 +25,5 @@ urlpatterns = [
     url(r'^activities/', include('activities.urls', namespace = 'activities')),
     url(r'^schedule/', include('schedule.urls', namespace = 'schedule')),  
     url(r'^abstract_contest/', include('abstract_contest.urls', namespace = 'abstract_contest')),
+    url(r'^poll/', include('poll.urls', namespace = 'poll')),  
 ]
