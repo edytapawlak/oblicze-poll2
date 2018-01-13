@@ -1,9 +1,16 @@
 {% extends 'base.html' %}
 
 {% block body %}
+<div class= "container" ><h2>Referaty</h2> </div>
+<form method = "post">
 {% csrf_token %}
-<form>
-{% for l in lectures %}
+    <div id = "scroll" class = "container" style = "position: fixed; text-align: right;" >
+        <input type="button" class="btn btn-danger btn-lg" onclick = "cleardata()" value = "Wyczyść">
+        <button type = "submit" class = "btn btn-success btn-lg" > Zatwierdź </button>
+    </div> <br><br><br>
+    <div class = "container">
+<hr>
+    {% for l in lectures %}
     <div id = {{l.id}}>
         <h4>{{ l }} </h4> <br>
         <input type="radio" name="jeden" value="{{l.id}}" onclick = "makeInactive(this)" onmousedown = "makeActive1()"  > 1 pkt <br>
@@ -13,6 +20,8 @@
         <br>
     </div>
 {% endfor %}
+
+</div>
 </form> 
 
 <script>
@@ -21,7 +30,7 @@ function makeInactive(x) {
             if(x.checked){
                 for(var i = 0; i < nodes.length; i++){
                     nodes[i].disabled = true;
-                    console.log('ustawiam nieaktywne');
+//                    console.log('ustawiam nieaktywne');
                 }
             }
    }
@@ -31,7 +40,7 @@ function makeActive1() {
      var nodes = document.getElementById(selected.value).getElementsByTagName('*');
         for(var i = 0; i < nodes.length; i++){
             nodes[i].disabled = false;
-             console.log('ustawiam aktywne');
+//             console.log('ustawiam aktywne');
             }
     }
 
@@ -40,7 +49,7 @@ function makeActive2() {
      var nodes = document.getElementById(selected.value).getElementsByTagName('*');
         for(var i = 0; i < nodes.length; i++){
             nodes[i].disabled = false;
-            console.log('ustawiam aktywne');
+//            console.log('ustawiam aktywne');
             }
    }
 
@@ -49,9 +58,18 @@ function makeActive3() {
      var nodes = document.getElementById(selected.value).getElementsByTagName('*');
         for(var i = 0; i < nodes.length; i++){
             nodes[i].disabled = false;
-            console.log('ustawiam aktywne');
+//            console.log('ustawiam aktywne');
             }
    }
+
+function cleardata(){
+    var selected = document.getElementsByTagName('input'); 
+//    console.log(selected.length);
+    for (var i = 0; i < selected.length; i++){
+        selected[i].checked = false;
+        selected[i].disabled = false;
+        }
+    }
 
 </script>
 
