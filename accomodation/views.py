@@ -73,6 +73,7 @@ class AccomodationView(TemplateView):
                 form_dinner = DinnerForm()
                 form_accomodation = AccomodationForm()
 
+            print(request.POST.dict())            
             
             redirect('accomodation:accomodation')
             args = {'form_dinner': form_dinner, 'form_accomodation': form_accomodation, 'dinner_dates' : dinner_days_list, 'hostel_dates': hostel_dates_list, 'user_din': dates, 'user_vege': vegeDinner, 'user_nights': hostel_nights }

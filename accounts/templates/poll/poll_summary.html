@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block body %}
+{% csrf_token %}
+<div class = "container"> <h1>Głos użytkownika {{user}}</h1> </div>
+<div class = "container">
+    <h2> Referaty: </h2>
+    {% for l, rate, author in lectures  %}
+        <div style = "background-color: #E5E9F0; padding-left: 10px"><h4>{{rate}} pkt</div> </h4> <h6>{{l.title}}</h6> <em>
+        {% for a in author %} {{a}} {% endfor %} </em> 
+        <br><hr>
+    {% endfor %}
+<a class = "btn btn-primary" style="float: right;" href = "{% url 'poll:edit_poll' %}"> Edytuj </a>
+</div>
+
+{% endblock %}
+
