@@ -1,5 +1,7 @@
 <!doctype html>
 {% load mathjax %}
+{% load poll_tags %}
+{% is_poll_active as active %}
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -67,9 +69,16 @@
             <li class="nav-item">
               <a class="nav-link" href="{% url 'activities:view_poster' %}">Rejestracja plakatów</a>
             </li>
+           {% if active %}
             <li class="nav-item">
               <a class="nav-link" href="{% url 'poll:view_poll' %}">Głosowanie</a>
             </li>
+            {% else %}
+                <li class="nav-item">
+              <a class="nav-link" href="{% url 'poll:view_poll' %}">Wyniki</a>
+            </li>
+
+            {% endif %}
           </ul>
             {% if perms.abstract_contest %}
             <hr>
