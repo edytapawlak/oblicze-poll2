@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class = "conttainer">
+<h1>Wyniki </h1>
+<div class = "container">
+<h2>Najlepsze referaty:  </h2>
+<hr>
+{% for l, r in ratings %}
+<div class = "container"> 
+<p>
+    {{ r }} pkt
+   <b> {{ l }}</b>
+</p>
+</div>
+{% endfor %}
+</div>
+
+<div class = "container">
+<h2>Najlepsze plakaty:  </h2>
+<hr>
+{% for l, r in pos_ratings %}
+<div class = "container"> 
+<p>
+    {{ r }} pkt
+   <b> {{ l }}</b>
+</p>
+</div>
+{% endfor %}
+</div>
+
+
+{% endblock %}
+

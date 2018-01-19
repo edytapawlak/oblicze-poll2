@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from activities.models import Lecture, Poster, Status, Author 
 from abstract_contest.models import ChoosedLecture, ChoosedPoster
 from django.http import FileResponse, Http404
@@ -16,7 +16,6 @@ def group_required(*group_names):
         return False
     return user_passes_test(in_groups)
 
-# Create your views here.
 @group_required('admins','Komisja')
 def choose_lectures(request):
     if (request.method == "POST"):
@@ -27,7 +26,7 @@ def choose_lectures(request):
             l = ChoosedLecture(lecture = lect)
             l.save()    
 
-    accepted_lectures = Lecture.objects.filter(status = Status.objects.get(title = "Czeka na akceptację")) 
+    accepted_lectures = Lecture.objects.filter(status__in = [Status.objects.get(id = 1), Status.objects.get(id = 3)]) 
     uncorrect_lectures = Lecture.objects.filter(status = Status.objects.get(title = "Czeka na poprawę")) 
     choosed = Lecture.objects.filter(choosedlecture__in = ChoosedLecture.objects.all())
     args = {'correct_lectures': accepted_lectures, 'uncorrect_lectures': uncorrect_lectures, 'choosed': choosed }
@@ -36,18 +35,36 @@ def choose_lectures(request):
 @group_required('admins','Komisja')
 def choose_posters(request):
     if (request.method == "POST"):
-        print(request.POST.getlist('correct'))
+#        print(request.POST.getlist('correct'))
         ChoosedPoster.objects.all().delete()
         for poster_id in request.POST.getlist('correct'):
             pos = Poster.objects.get(id = poster_id)
             l = ChoosedPoster(poster = pos)
             l.save()    
 
-    accepted_posters = Poster.objects.filter(status = Status.objects.get(title = "Czeka na akceptację")) 
+    accepted_posters = Poster.objects.filter(status__in = [Status.objects.get(id = 1), Status.objects.get(id = 3)]) 
     uncorrect_posters = Poster.objects.filter(status = Status.objects.get(title = "Czeka na poprawę")) 
     choosed = Poster.objects.filter(choosedposter__in = ChoosedPoster.objects.all())
     args = {'correct_posters': accepted_posters, 'uncorrect_posters': uncorrect_posters, 'choosed': choosed }
     return render(request, 'abstract_contest/view_posters.html', args)
+
+
+@group_required('admins','Komisja')
+def accept_contest(request):
+    choosed_posters= ChoosedPoster.objects.all()
+    posters_to_accept = [ x.poster for x in choosed_posters]
+    choosed_lectures = ChoosedLecture.objects.all()
+    lectures_to_accept = [ x.lecture for x in choosed_lectures]
+    if request.method == 'POST':
+        Poster.objects.filter(status = Status.objects.get(id = 3)).update(status = Status.objects.get(id = 1))
+        Lecture.objects.filter(status = Status.objects.get(id = 3)).update(status = Status.objects.get(id = 1))
+        for p in posters_to_accept:
+            Poster.objects.filter(id = p.id).update(status = Status.objects.get(id = 3))
+        for l in lectures_to_accept:
+            Lecture.objects.filter(id = l.id).update(status = Status.objects.get(id = 3))
+        return redirect('/abstract_contest/accept_contest')
+    else:
+        return render(request, 'abstract_contest/accept_contest.html', {'accepted_lect': lectures_to_accept,'accepted_pos': posters_to_accept})
 
 def generate_book(request):
     filename = 'broszurka'

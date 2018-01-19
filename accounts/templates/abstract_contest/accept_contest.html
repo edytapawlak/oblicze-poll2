@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<form method = "post">
+    {% csrf_token %}
+<div class = "container">
+<div class="float-md-right">
+<input class="btn btn-info" type = "submit" value= "Zapisz" >
+</div></div>
+<div class = "container">
+<h4>Referaty zaakceptowane</h4>
+    {% for a in accepted_lect%}
+       {{ a.title }} <br>
+    {% endfor %}
+</div>
+<br>
+<div class = "container" >
+<h4>Plakaty zaakceptowane</h4>
+    {% for a in accepted_pos %}
+       {{ a.title }} <br>
+    {% endfor %}
+</div>
+{% endblock %}
+

@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class= "container" ><h2>Referaty</h2> </div>
+<form method = "post">
+{% csrf_token %}
+    <div id = "scroll" class = "container" style = "position: fixed; text-align: right;" >
+        <input type="button" class="btn btn-danger btn-lg" onclick = cleardata()  value = "Wyczyść">
+        <button type = "submit" class = "btn btn-success btn-lg" > Zatwierdź </button>
+    </div> <br><br><br>
+    <div class = "container">
+<hr>
+
+    {% for l, rate, author in ratings %}
+        <div id = {{l.id}}>
+        <h4>{{ l }} </h4> <br>
+        {% if rate == 1 %}         
+            <input type="radio" name="jeden" value="{{l.id}}" onclick = "makeInactive(this)" onmouseup= "makeActive1()" checked > 1 pkt <br>
+            <input type="radio" name="dwa" value="{{l.id }}" onclick = "makeInactive(this)" onmouseup= "makeActive2()" disabled > 2 pkt <br>
+            <input type="radio" name="trzy" value="{{ l.id }}" onclick = "makeInactive(this)" onmouseup= "makeActive3()" disabled > 3 pkt 
+            <br>
+            <br>
+        {% elif rate == 2 %}
+            <input type="radio" name="jeden" value="{{l.id}}" onclick = "makeInactive(this)" onmouseup= "makeActive1()" disabled> 1 pkt <br>
+            <input type="radio" name="dwa" value="{{l.id }}" onclick = "makeInactive(this)" onmouseup = "makeActive2()" checked> 2 pkt <br>
+            <input type="radio" name="trzy" value="{{ l.id }}" onclick = "makeInactive(this)" onmouseup= "makeActive3()" disabled > 3 pkt
+            <br>
+            <br>
+        {% elif rate == 3 %}
+            <input type="radio" name="jeden" value="{{l.id}}" onclick = "makeInactive(this)" onmouseup= "makeActive1()" disabled> 1 pkt <br>
+            <input type="radio" name="dwa" value="{{l.id }}" onclick = "makeInactive(this)" onmouseup= "makeActive2()" disabled> 2 pkt <br>
+            <input type="radio" name="trzy" value="{{ l.id }}" onclick = "makeInactive(this)" onmouseup= "makeActive3()" checked> 3 pkt
+            <br>
+            <br>
+        {% endif %} 
+
+    </div>
+
+    {% endfor %}    
+
+    {% for l in posters %}
+    {% if l not in rated %}
+    <div id = {{l.id}}>
+        <h4>{{ l }} </h4> <br>
+        <input type="radio" name="jeden" value="{{l.id}}" onclick = "makeInactive(this)" onmouseup = "makeActive1()"  > 1 pkt <br>
+        <input type="radio" name="dwa" value="{{l.id }}" onclick = "makeInactive(this)" onmouseup= "makeActive2()" > 2 pkt <br>
+        <input type="radio" name="trzy" value="{{ l.id }}" onclick = "makeInactive(this)" onmouseup= "makeActive3()" > 3 pkt 
+        <br>
+        <br>
+    </div>
+    {% endif %}
+{% endfor %}
+
+    </div>
+</form> 
+
+<script>
+function makeInactive(x) {
+     var nodes = document.getElementById(x.value).getElementsByTagName('*');
+            if(x.checked){
+                for(var i = 0; i < nodes.length; i++){
+                    if(!nodes[i].checked){
+                        nodes[i].disabled = true;
+                    console.log('ustawiam nieaktywne');
+                    }
+                }
+            }
+   }
+
+function makeActive1() {
+     var selected = document.querySelector('input[name = "jeden"]:checked'); 
+     var nodes = document.getElementById(selected.value).getElementsByTagName('*');
+        for(var i = 0; i < nodes.length; i++){
+            nodes[i].disabled = false;
+//             console.log('ustawiam aktywne');
+            }
+    }
+
+function makeActive2() {
+     var selected = document.querySelector('input[name = "dwa"]:checked'); 
+     var nodes = document.getElementById(selected.value).getElementsByTagName('*');
+        for(var i = 0; i < nodes.length; i++){
+            nodes[i].disabled = false;
+//            console.log('ustawiam aktywne');
+            }
+   }
+
+function makeActive3() {
+     var selected = document.querySelector('input[name = "trzy"]:checked'); 
+     var nodes = document.getElementById(selected.value).getElementsByTagName('*');
+        for(var i = 0; i < nodes.length; i++){
+            nodes[i].disabled = false;
+//            console.log('ustawiam aktywne');
+            }
+   }
+
+function cleardata(){
+    var selected = document.getElementsByTagName('input'); 
+//    console.log(selected.length);
+    for (var i = 0; i < selected.length; i++){
+        selected[i].checked = false;
+        selected[i].disabled = false;
+        }
+    }
+
+</script>
+
+{% endblock %}
+

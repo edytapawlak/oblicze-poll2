@@ -75,7 +75,7 @@
             </li>
             {% else %}
                 <li class="nav-item">
-              <a class="nav-link" href="{% url 'poll:view_poll' %}">Wyniki</a>
+              <a class="nav-link" href="{% url 'poll:results' %}">Wyniki</a>
             </li>
 
             {% endif %}
@@ -94,7 +94,10 @@
                     <a class="nav-link" href="{% url 'abstract_contest:generate_pdf' %}">Pobierz referaty i plakaty  w PDF</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Zatwierdź wyniki konkursu</a>
+                    <a class="nav-link" href="{% url 'abstract_contest:accept_contest' %}">zatwierdź wyniki konkursu</a>
+                </li>
+                 <li class="nav-item">
+                    <a class="nav-link" href="{% url 'poll:finish_poll' %}">Zakończ głosowanie</a>
                 </li>
             </ul>
             {% endif %}

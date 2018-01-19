@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class = "container"> <h1>Zarządzaj głosowaniem</h1> </div>
+<form method= "post">
+{% csrf_token %}
+    {{ form.as_p }}
+<button type = "submit"> Zatwierdź </button>
+</div>
+</form>
+
+{% endblock %}
+

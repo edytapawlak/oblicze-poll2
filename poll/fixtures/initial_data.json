@@ -1,0 +1,9 @@
+[
+  {
+    "model": "poll.status",
+    "pk": 1,
+    "fields": {
+      "poll_status": 1 
+    }
+  }
+]
